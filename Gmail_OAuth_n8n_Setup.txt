@@ -1,0 +1,54 @@
+
+GMAIL OAUTH SETUP FOR n8n (SEND EMAIL ONLY)
+========================================
+
+Purpose:
+- Send alert emails from n8n using Gmail OAuth (no IMAP, no inbox reading)
+
+Prerequisites:
+- Google account
+- n8n running (localhost or hosted)
+
+STEP 1: Google Cloud Project
+1. Go to https://console.cloud.google.com/
+2. Create a new project (e.g., Ops-Jaanu-n8n)
+
+STEP 2: Enable APIs
+Enable the following:
+- Gmail API
+
+STEP 3: OAuth Consent Screen
+1. User type: External
+2. App name: Ops Jaanu n8n
+3. Add your email as Test User
+4. Save (Publishing status can stay as Testing)
+
+STEP 4: Create OAuth Client
+1. Credentials → Create Credentials → OAuth Client ID
+2. Application type: Web application
+3. Authorized Redirect URI:
+   http://localhost:5678/rest/oauth2-credential/callback
+
+IMPORTANT:
+- Do NOT add JavaScript origins
+- Redirect URI must match exactly
+
+STEP 5: Configure n8n Gmail Node
+1. Add node: Gmail → Send a message
+2. Create new credential
+3. Paste Client ID & Client Secret
+4. Click “Sign in with Google”
+5. Allow permissions
+
+STEP 6: Test
+- Trigger workflow
+- Confirm email received
+
+Best Practices:
+- Freeze working workflows
+- Duplicate before reuse
+- Never export credentials to GitHub
+
+Troubleshooting:
+- invalid_client → check redirect URI
+- blank email body → ensure upstream node passes input fields

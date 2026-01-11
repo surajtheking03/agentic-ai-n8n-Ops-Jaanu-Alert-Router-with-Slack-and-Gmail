@@ -1,0 +1,56 @@
+
+SLACK BOT + TOKEN SETUP FOR n8n
+==============================
+
+Purpose:
+- Post messages to Slack channels from n8n
+
+STEP 1: Create Slack Workspace
+- Workspace name example: NAME_OF_YOUR_BOT
+- Create channel: #NAME_OF_YOUR_BOT_CHANNEL
+
+STEP 2: Create Slack App
+1. Go to https://api.slack.com/apps
+2. Create New App → From Scratch
+3. App Name: NAME YOUR BOT
+4. Select Workspace
+
+STEP 3: Bot Token Scopes
+OAuth & Permissions → Bot Token Scopes:
+- chat:write
+- channels:read
+
+Save changes.
+
+STEP 4: Install App
+- Click “Install to Workspace”
+- Allow permissions
+
+STEP 5: Invite Bot to Channel
+In Slack channel:
+/invite @*NAME_OF_YOUR_BOT*
+
+IMPORTANT:
+If bot is not invited → you will get:
+Slack error: not_in_channel
+
+STEP 6: Configure n8n Slack Node
+1. Add node: Slack → Send a message
+2. Credential:
+   - Connect using: Access Token
+   - Paste Bot User OAuth Token (xoxb-…)
+3. Send Message To: Channel
+4. Channel: #NAME_OF_YOUR_BOT_CHANNEL
+
+STEP 7: Test
+- Trigger workflow
+- Confirm message in Slack channel
+
+Common Errors:
+- not_in_channel → invite bot
+- missing_scope → recheck scopes & reinstall app
+
+Best Practices:
+- Use separate bots per environment if needed
+- Freeze working workflows
+- Duplicate before extending
